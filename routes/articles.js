@@ -4,14 +4,14 @@ const {
   getArticles,
   createArticle,
   deleteArticle,
- } = require('../controllers/articles');
+} = require('../controllers/articles');
 
 const auth = require('../middlewares/auth');
 
 const {
   validateArticle,
   validateArticleId,
- } = require('../middlewares/validation');
+} = require('../middlewares/validation');
 
 const router = express.Router();
 
