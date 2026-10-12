@@ -1,10 +1,6 @@
-const fs = require('fs');
-const path = require('path');
 const { isCelebrateError } = require('celebrate');
 
-const errorLogPath = path.join(__dirname, '../logs/error.log');
-
-const errorHandler = (err, req, res, next) => {
+const errorHandler = (err, req, res) => {
   const log = {
     method: req.method,
     url: req.originalUrl,
@@ -12,17 +8,7 @@ const errorHandler = (err, req, res, next) => {
     error: err.message,
   };
 
-  fs.appendFile(
-    errorLogPath,
-    `${JSON.stringify(log)}\n`,
-    (logError) => {
-      if (logError) {
-        return next(logError);
-      }
-
-      return null;
-    },
-  );
+  console.error(JSON.stringify(log));
 
   if (isCelebrateError(err)) {
     return res.status(400).send({
